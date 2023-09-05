@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700;900&display=swap');
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+$c-main : #443A3A;
+$c-second : #fff;
+$c-tertiary : #29B7C5;
+
+$radius : 10px;
+
+// #####
+// MIXIN
+// #####
+
+// text global
+@mixin basicText($c : $c-main,$s :24px,$w : 700){
+  color: $c;
+  font-family: 'Roboto', sans-serif;
+  font-size: $s;
+  font-style: normal;
+  font-weight: $w;
+  line-height: normal;
+}
+
+// Main background blur
+@mixin backgroundInclude(){
+  background: rgba(255, 255, 255, 0.50);
+  backdrop-filter: blur(15px);
+}
