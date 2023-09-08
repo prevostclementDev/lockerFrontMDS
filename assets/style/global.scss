@@ -2,33 +2,29 @@
 
 #global-container {
   position: relative;
+  background: $c-second;
+  overflow: hidden;
 
-  .backgroundCircle-wrapper {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-
-    .circle {
-      width: 80vw;
-      height: 80vw;
-      background: $c-tertiary;
-      border-radius: 50%;
-      position: absolute;
-      &:first-child {
-        background: $c-main;
-        transform: translate(-20%,20%);
-      }
-      &:last-child {
-        right: 0;
-        top: 0;
-        transform: translate(20%,-45%);
-      }
+  #cursor {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    z-index: 99999999999999;
+    pointer-events: none;
+    backdrop-filter: invert(1);
+    @media screen and (max-width: 1024px) {
+      display:  none;
     }
+  }
 
+  #displaySettingButton {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: transparent;
+    border: none;
+    outline: none;
   }
 
   #global-content-container {
@@ -36,20 +32,18 @@
     z-index: 1;
     width: 100%;
     min-height: 100vh;
-    @include backgroundInclude;
 
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     grid-template-areas: "interaction";
 
-    .interaction-container {
+    .interaction-container  {
       grid-area: interaction;
       display: flex;
       justify-content: center;
       align-items: center;
       form {
-        background: $c-second;
         border-radius: $radius;
         width: fit-content;
         padding:50px;
@@ -63,13 +57,17 @@
           @include basicText();
           margin-bottom: 15px;
           width: 100%;
+          text-align: center;
         }
 
         label {
           width: 100%;
           margin: 20px 0;
           position: relative;
-          display: block;
+          display: flex;
+          gap: 15px;
+          justify-content: center;
+          align-items: center;
           & > span {
             position: absolute;
             top: 50%;
@@ -105,12 +103,32 @@
             }
           }
           input {
-            width: 100%;
-            background: transparent;
-            padding: 10px 8px;
+            width: 80px;
+            height: 80px;
+            background: $c-main-hover;
+            padding: 15px 5px;
             outline: none;
-            border: 1px solid $c-main;
+            border: 1px solid transparent;
             border-radius: $radius;
+            color: $c-main;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            font-size: 32px;
+            @media screen and (max-width: 598px) {
+              width: calc(100% / 3);
+              height: 60px;
+            }
+            &:focus {
+              border-color: #BA841B;
+            }
+            /* Chrome, Safari, Edge, Opera */
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+              appearance: none;
+            }
+            -moz-appearance: textfield;
           }
         }
 
@@ -121,23 +139,263 @@
           flex-wrap: wrap;
           column-gap: 10px;
           row-gap: 10px;
-          width: calc(60px * 3 + 20px);
+          width: calc(160px * 3 + 20px);
+          margin-top : 40px;
+          
+          @media screen and (max-width: 598px) {
+            width: 90%;
+          }
+
           .touch {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: $radius;
-            background: transparent;
             outline: none;
             border: none;
-            cursor: pointer;
             background: $c-main ;
             @include basicText($c-second,20px,900);
             display: flex;
             justify-content: center;
             align-items: center;
+
+
+            &:not(.onmobile) {
+              @media screen and (max-width: 1024px) {
+                display:  none;
+              }
+            }
+
+            @media screen and (max-width: 598px) {
+              width: 40px;
+              height: 40px;
+            }
+
+            svg {
+              &.stroke {
+                path {
+                  stroke: $c-second;
+                }
+              }
+              &.fill {
+                path {
+                  fill: $c-second;
+                }
+              }
+            }
+            &:hover {
+              background: $c-main-hover;
+              color: $c-main;
+              svg {
+                &.stroke {
+                  path {
+                    stroke: $c-main;
+                  }
+                }
+                &.fill {
+                  path {
+                    fill: $c-main;
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
+
+    #closeInterface {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 10px 15px;
+      background: $c-main;
+      border-radius: $radius;
+      outline: none;
+      border: none;
+      span {
+        margin-left: 5px;
+      }
+    }
+
+    #speechOpen {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      background: transparent;
+      border: none;
+      outline: none;
+      display: none;
+      &.comptabible {
+        display: block;
+      }
+    }
+
   }
+
+  #homepage {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: $c-second;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    @include basicText();
+    text-align: center;
+    h2 {
+      font-size: 30px;
+    }
+    p {
+      font-size: 20px;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px;
+      background: $c-main;
+      outline: none;
+      border: none;
+      @include basicText($c-second,16px);
+      border-radius: $radius;
+      margin-top: 30px;
+    }
+    .backgroundOnSwitch {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: $c-main;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+      transform-origin: bottom;
+      transform: scaleY(0);
+    }
+  }
+
+  #setting {
+    transform: translateX(100%);
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    //background: $c-main-opacity ;
+    z-index: 999999999;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    .notice-checked {
+      background: #EAF6ED;
+      border: 1px solid #C2E6CB;
+      @include basicText(#2AB550,16px);
+      width: 100%;
+      padding: 10px 20px;
+      border-radius: $radius;
+      margin: 15px 0;
+      &.error {
+        background: #E1D4D1;
+        border: 1px solid #E7C4BC;
+        color: #D34628;
+      }
+    }
+    #content {
+      transform: translateX(100%);
+      padding: 30px;
+      background: $c-main;
+      height: 100%;
+      min-width: 50vw;
+      position: relative;
+      h2 {
+        @include basicText($c-second);
+        text-align: left;
+        margin: 10px 0;
+      }
+      .lockerStatusList {
+        padding: 15px 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        .lockerStatus {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          @include basicText($c-second,14px,500);
+          span.bolder {
+            font-weight: 900;
+          }
+          button {
+            outline: none;
+            border: none;
+            text-decoration: underline;
+            @include basicText($c-second,16px);
+          }
+        }
+      }
+      .closeModalContent {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+        padding: 10px;
+        background: $c-second;
+        outline: none;
+        border: none;
+        border-radius: $radius;
+        @include basicText($c-main,14px);
+      }
+    }
+  }
+
+  #speechmodal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: $c-main-opacity;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999999;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    opacity: 0;
+    display: none;
+
+    .loader {
+      margin-bottom: 20px;
+      padding: 20px;
+      display: flex;
+      .ball {
+        width: 25px;
+        height: 25px;
+        background: $c-main;
+        border-radius: 50%;
+        margin: 0 10px;
+      }
+    }
+
+    p {
+      @include basicText($c-main,16px);
+    }
+
+    button {
+      padding: 10px;
+      background: $c-main;
+      outline: none;
+      border: none;
+      @include basicText($c-second,16px);
+      border-radius: $radius;
+      margin-top: 30px;
+    }
+
+  }
+
 }

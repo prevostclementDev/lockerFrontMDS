@@ -5,8 +5,9 @@ html {
   font-size: 16px;
 }
 
-*, *:before, *:after {
+*, *:before, *:after,button,input {
   box-sizing: inherit;
+  cursor: none;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
@@ -24,8 +25,10 @@ img {
   height: auto;
 }
 
-$c-main : #443A3A;
-$c-second : #fff;
+$c-main : #E7E7E7;
+$c-main-hover : #181818;
+$c-main-opacity : rgba(10, 10, 10, 0.93);
+$c-second : #1E1E1E;
 $c-tertiary : #29B7C5;
 
 $radius : 10px;

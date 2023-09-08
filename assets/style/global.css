@@ -4,8 +4,9 @@ html {
   font-size: 16px;
 }
 
-*, *:before, *:after {
+*, *:before, *:after, button, input {
   box-sizing: inherit;
+  cursor: none;
 }
 
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
@@ -25,39 +26,36 @@ img {
 
 #global-container {
   position: relative;
-}
-#global-container .backgroundCircle-wrapper {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  z-index: 0;
-  top: 0;
-  left: 0;
+  background: #1E1E1E;
   overflow: hidden;
 }
-#global-container .backgroundCircle-wrapper .circle {
-  width: 80vw;
-  height: 80vw;
-  background: #29B7C5;
-  border-radius: 50%;
+#global-container #cursor {
   position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 99999999999999;
+  pointer-events: none;
+  backdrop-filter: invert(1);
 }
-#global-container .backgroundCircle-wrapper .circle:first-child {
-  background: #443A3A;
-  transform: translate(-20%, 20%);
+@media screen and (max-width: 1024px) {
+  #global-container #cursor {
+    display: none;
+  }
 }
-#global-container .backgroundCircle-wrapper .circle:last-child {
-  right: 0;
-  top: 0;
-  transform: translate(20%, -45%);
+#global-container #displaySettingButton {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 #global-container #global-content-container {
   position: relative;
   z-index: 1;
   width: 100%;
   min-height: 100vh;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(15px);
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr;
@@ -70,7 +68,6 @@ img {
   align-items: center;
 }
 #global-container #global-content-container .interaction-container form {
-  background: #fff;
   border-radius: 10px;
   width: fit-content;
   padding: 50px;
@@ -81,7 +78,7 @@ img {
   flex-direction: column;
 }
 #global-container #global-content-container .interaction-container form h2 {
-  color: #443A3A;
+  color: #E7E7E7;
   font-family: "Roboto", sans-serif;
   font-size: 24px;
   font-style: normal;
@@ -89,19 +86,23 @@ img {
   line-height: normal;
   margin-bottom: 15px;
   width: 100%;
+  text-align: center;
 }
 #global-container #global-content-container .interaction-container form label {
   width: 100%;
   margin: 20px 0;
   position: relative;
-  display: block;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
 #global-container #global-content-container .interaction-container form label > span {
   position: absolute;
   top: 50%;
   left: 0;
   pointer-events: none;
-  color: #443A3A;
+  color: #E7E7E7;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -121,7 +122,7 @@ img {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #fff;
+  background: #1E1E1E;
   z-index: 0;
   top: 0;
   left: 0;
@@ -135,12 +136,33 @@ img {
   transform: scaleX(1);
 }
 #global-container #global-content-container .interaction-container form label input {
-  width: 100%;
-  background: transparent;
-  padding: 10px 8px;
+  width: 80px;
+  height: 80px;
+  background: #181818;
+  padding: 15px 5px;
   outline: none;
-  border: 1px solid #443A3A;
+  border: 1px solid transparent;
   border-radius: 10px;
+  color: #E7E7E7;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 32px;
+  /* Chrome, Safari, Edge, Opera */
+  -moz-appearance: textfield;
+}
+@media screen and (max-width: 598px) {
+  #global-container #global-content-container .interaction-container form label input {
+    width: 33.3333333333%;
+    height: 60px;
+  }
+}
+#global-container #global-content-container .interaction-container form label input:focus {
+  border-color: #BA841B;
+}
+#global-container #global-content-container .interaction-container form label input::-webkit-outer-spin-button, #global-container #global-content-container .interaction-container form label input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  appearance: none;
 }
 #global-container #global-content-container .interaction-container form .number-panel-wrapper {
   display: flex;
@@ -149,18 +171,22 @@ img {
   flex-wrap: wrap;
   column-gap: 10px;
   row-gap: 10px;
-  width: 200px;
+  width: 500px;
+  margin-top: 40px;
+}
+@media screen and (max-width: 598px) {
+  #global-container #global-content-container .interaction-container form .number-panel-wrapper {
+    width: 90%;
+  }
 }
 #global-container #global-content-container .interaction-container form .number-panel-wrapper .touch {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 10px;
-  background: transparent;
   outline: none;
   border: none;
-  cursor: pointer;
-  background: #443A3A;
-  color: #fff;
+  background: #E7E7E7;
+  color: #1E1E1E;
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-style: normal;
@@ -169,6 +195,259 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@media screen and (max-width: 1024px) {
+  #global-container #global-content-container .interaction-container form .number-panel-wrapper .touch:not(.onmobile) {
+    display: none;
+  }
+}
+@media screen and (max-width: 598px) {
+  #global-container #global-content-container .interaction-container form .number-panel-wrapper .touch {
+    width: 40px;
+    height: 40px;
+  }
+}
+#global-container #global-content-container .interaction-container form .number-panel-wrapper .touch svg.stroke path {
+  stroke: #1E1E1E;
+}
+#global-container #global-content-container .interaction-container form .number-panel-wrapper .touch svg.fill path {
+  fill: #1E1E1E;
+}
+#global-container #global-content-container .interaction-container form .number-panel-wrapper .touch:hover {
+  background: #181818;
+  color: #E7E7E7;
+}
+#global-container #global-content-container .interaction-container form .number-panel-wrapper .touch:hover svg.stroke path {
+  stroke: #E7E7E7;
+}
+#global-container #global-content-container .interaction-container form .number-panel-wrapper .touch:hover svg.fill path {
+  fill: #E7E7E7;
+}
+#global-container #global-content-container #closeInterface {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px 15px;
+  background: #E7E7E7;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+#global-container #global-content-container #closeInterface span {
+  margin-left: 5px;
+}
+#global-container #global-content-container #speechOpen {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  background: transparent;
+  border: none;
+  outline: none;
+  display: none;
+}
+#global-container #global-content-container #speechOpen.comptabible {
+  display: block;
+}
+#global-container #homepage {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background: #1E1E1E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #E7E7E7;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+}
+#global-container #homepage h2 {
+  font-size: 30px;
+}
+#global-container #homepage p {
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+#global-container #homepage button {
+  padding: 10px;
+  background: #E7E7E7;
+  outline: none;
+  border: none;
+  color: #1E1E1E;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+#global-container #homepage .backgroundOnSwitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #E7E7E7;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  transform-origin: bottom;
+  transform: scaleY(0);
+}
+#global-container #setting {
+  transform: translateX(100%);
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999999;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+#global-container #setting .notice-checked {
+  background: #EAF6ED;
+  border: 1px solid #C2E6CB;
+  color: #2AB550;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 15px 0;
+}
+#global-container #setting .notice-checked.error {
+  background: #E1D4D1;
+  border: 1px solid #E7C4BC;
+  color: #D34628;
+}
+#global-container #setting #content {
+  transform: translateX(100%);
+  padding: 30px;
+  background: #E7E7E7;
+  height: 100%;
+  min-width: 50vw;
+  position: relative;
+}
+#global-container #setting #content h2 {
+  color: #1E1E1E;
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: left;
+  margin: 10px 0;
+}
+#global-container #setting #content .lockerStatusList {
+  padding: 15px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+}
+#global-container #setting #content .lockerStatusList .lockerStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #1E1E1E;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+#global-container #setting #content .lockerStatusList .lockerStatus span.bolder {
+  font-weight: 900;
+}
+#global-container #setting #content .lockerStatusList .lockerStatus button {
+  outline: none;
+  border: none;
+  text-decoration: underline;
+  color: #1E1E1E;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#global-container #setting #content .closeModalContent {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  padding: 10px;
+  background: #1E1E1E;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  color: #E7E7E7;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#global-container #speechmodal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(10, 10, 10, 0.93);
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  display: none;
+}
+#global-container #speechmodal .loader {
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+}
+#global-container #speechmodal .loader .ball {
+  width: 25px;
+  height: 25px;
+  background: #E7E7E7;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+#global-container #speechmodal p {
+  color: #E7E7E7;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+#global-container #speechmodal button {
+  padding: 10px;
+  background: #E7E7E7;
+  outline: none;
+  border: none;
+  color: #1E1E1E;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 10px;
+  margin-top: 30px;
 }
 
 /*# sourceMappingURL=global.css.map */

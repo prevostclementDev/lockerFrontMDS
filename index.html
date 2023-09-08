@@ -11,25 +11,51 @@
 
     <section id="global-container">
 
-        <div class="backgroundCircle-wrapper">
-            <div class="circle"></div>
-            <div class="circle"></div>
-        </div>
+        <div id="cursor"></div>
+
+        <section id="homepage">
+            <section class="titre">
+                <h1>Ouvrez vos casiers avec notre service en ligne</h1>
+                <p>Vos casiers, votre espace, votre contrôle</p>
+            </section>
+            <button id="homepageSwitch">Accéder</button>
+            <div class="backgroundOnSwitch"></div>
+        </section>
 
         <section id="global-content-container">
 
             <div class="interaction-container">
+
+                <button id="speechOpen">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 16C14.206 16 16 14.206 16 12V6C16 3.783 14.215 1.979 12.021 1.979C11.9506 1.97943 11.8805 1.98781 11.812 2.004C10.7853 2.05378 9.81693 2.49636 9.10738 3.24016C8.39783 3.98395 8.00136 4.97205 8 6V12C8 14.206 9.794 16 12 16Z" fill="white"/>
+                        <path d="M11 19.931V22H13V19.931C16.939 19.436 20 16.073 20 12H18C18 15.309 15.309 18 12 18C8.691 18 6 15.309 6 12H4C4 16.072 7.061 19.436 11 19.931Z" fill="white"/>
+                    </svg>
+                </button>
+
+                <button id="displaySettingButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M34 12V21C32.5957 20.9984 31.2069 21.2933 29.9245 21.8654C28.6421 22.4375 27.4949 23.2739 26.558 24.32C24.9078 26.1533 23.9964 28.5335 24 31C24.0006 32.77 24.4705 34.5082 25.3619 36.0375C26.2532 37.5667 27.5341 38.8322 29.074 39.705C26.412 40.51 22.878 41 19 41C10.716 41 4 38.761 4 36V12" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M44 31C44 36.523 39.523 41 34 41C32.21 41 30.528 40.53 29.074 39.705C27.5341 38.8322 26.2532 37.5667 25.3619 36.0375C24.4705 34.5082 24.0006 32.77 24 31C24 28.432 24.968 26.09 26.558 24.32C27.4949 23.2739 28.6421 22.4375 29.9245 21.8654C31.2069 21.2933 32.5957 20.9984 34 21C39.523 21 44 25.477 44 31ZM34 12C34 14.761 27.284 17 19 17C10.716 17 4 14.761 4 12C4 9.239 10.716 7 19 7C27.284 7 34 9.239 34 12Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M4 28C4 30.761 10.716 33 19 33C20.807 33 22.54 32.894 24.144 32.698M4 20C4 22.761 10.716 25 19 25C21.756 25 24.339 24.752 26.558 24.32M34 27L37.464 29V33L34 35L30.536 33V29L34 27Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+
                 <div class="form">
-                    <form method="get" action="">
+                    <form method="GET" action="">
 
-                        <h2>MyDigitalSchool Locker</h2>
+                        <h2>Veuillez saisir le code de votre casier</h2>
 
-                        <label for="number" id="label_number">
-                            <span class="label_text"><span>Votre code</span></span>
-                            <input type="number" name="number" id="number">
+                        <label id="label_number" step="1">
+<!--                            <span class="label_text"><span>Votre code</span></span>-->
+                            <input type="number" name="number" attr-number="1" class="numberInput" required>
+                            <input type="number" name="number" attr-number="2" class="numberInput"  required>
+                            <input type="number" name="number" attr-number="3" class="numberInput"  required>
+                            <input type="number" name="number" attr-number="4" class="numberInput"  required>
                         </label>
 
                         <div class="number-panel-wrapper">
+                            <button value="0" class="touch">0</button>
                             <button value="1" class="touch">1</button>
                             <button value="2" class="touch">2</button>
                             <button value="3" class="touch">3</button>
@@ -39,24 +65,70 @@
                             <button value="7" class="touch">7</button>
                             <button value="8" class="touch">8</button>
                             <button value="9" class="touch">9</button>
-                            <button value="delete" class="touch">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="20" viewBox="0 0 27 20" fill="none">
+                            <button value="delete" class="touch onmobile">
+                                <svg class="stroke" xmlns="http://www.w3.org/2000/svg" width="27" height="20" viewBox="0 0 27 20" fill="none">
                                     <path d="M21 6L13.5 13.5M13.5 6L21 13.5M23.5 1H9.75L1 9.75L9.75 18.5H23.5C24.163 18.5 24.7989 18.2366 25.2678 17.7678C25.7366 17.2989 26 16.663 26 16V3.5C26 2.83696 25.7366 2.20107 25.2678 1.73223C24.7989 1.26339 24.163 1 23.5 1Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
-                            <button value="0" class="touch">0</button>
-                            <button value="submit" type="submit" class="touch">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                                    <path d="M13 0C5.8 0 0 5.8 0 13C0 20.2 5.8 26 13 26C20.2 26 26 20.2 26 13C26 11.6 25.812 10.206 25.312 8.906L23.688 10.5C23.888 11.3 24.001 12.1 24.001 13C24.001 19.1 19.101 24 13.001 24C6.901 24 2 19.1 2 13C2 6.9 6.9 2 13 2C16 2 18.694 3.194 20.594 5.094L22 3.688C19.7 1.388 16.5 0 13 0ZM24.28 4.28L13 15.563L8.72 11.283L7.28 12.72L12.28 17.72L13 18.406L13.72 17.719L25.72 5.719L24.28 4.279V4.28Z" fill="white"/>
+                            <button value="submit" type="submit" class="touch onmobile">
+                                <svg class="fill" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                                    <path d="M13 0C5.8 0 0 5.8 0 13C0 20.2 5.8 26 13 26C20.2 26 26 20.2 26 13C26 11.6 25.812 10.206 25.312 8.906L23.688 10.5C23.888 11.3 24.001 12.1 24.001 13C24.001 19.1 19.101 24 13.001 24C6.901 24 2 19.1 2 13C2 6.9 6.9 2 13 2C16 2 18.694 3.194 20.594 5.094L22 3.688C19.7 1.388 16.5 0 13 0ZM24.28 4.28L13 15.563L8.72 11.283L7.28 12.72L12.28 17.72L13 18.406L13.72 17.719L25.72 5.719L24.28 4.279V4.28Z" fill="#181818"/>
                                 </svg>
                             </button>
                         </div>
                     </form>
                 </div>
+
+                <button id="closeInterface">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9999 5.00001C13.9999 4.8674 13.9472 4.74022 13.8535 4.64646C13.7597 4.55269 13.6325 4.50001 13.4999 4.50001L1.70692 4.50001L4.85392 1.35401C4.9478 1.26012 5.00055 1.13279 5.00055 1.00001C5.00055 0.867234 4.9478 0.739896 4.85392 0.646009C4.76003 0.552123 4.63269 0.499378 4.49992 0.499378C4.36714 0.499378 4.2398 0.552123 4.14592 0.646009L0.145917 4.64601C0.0993538 4.69246 0.0624109 4.74763 0.0372045 4.80838C0.011998 4.86912 -0.000976762 4.93424 -0.000976759 5.00001C-0.000976756 5.06578 0.011998 5.1309 0.0372045 5.19164C0.0624109 5.25239 0.0993538 5.30756 0.145917 5.35401L4.14592 9.35401C4.1924 9.4005 4.24759 9.43737 4.30833 9.46253C4.36907 9.48769 4.43417 9.50064 4.49992 9.50064C4.63269 9.50064 4.76003 9.4479 4.85392 9.35401C4.9478 9.26012 5.00055 9.13278 5.00055 9.00001C5.00055 8.86723 4.9478 8.7399 4.85392 8.64601L1.70692 5.50001L13.4999 5.50001C13.6325 5.50001 13.7597 5.44733 13.8535 5.35356C13.9472 5.25979 13.9999 5.13262 13.9999 5.00001Z" fill="black"/>
+                    </svg>
+                    <span>Fermer</span>
+                </button>
+
             </div>
+
         </section>
+
+        <section id="setting">
+            <section id="content">
+                <h2>Statut du locker</h2>
+                <hr>
+                <div class="notice-checked "> <!-- error -->
+                    <p class="">Aucune action réalisée</p>
+                </div>
+                <hr>
+
+                <div class="lockerStatusList">
+                </div>
+
+                <button class="closeModalContent">Fermer</button>
+            </section>
+        </section>
+
+        <section id="speechmodal">
+            <div class="loader">
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+            </div>
+            <p id="returnSpeech"></p>
+            <button id="stopSpeech">Stop</button>
+        </section>
+
     </section>
 
+    <template id="lockerDisplayStatus">
+        <div class="lockerStatus">
+            <p> Le casier <span class="bolder">1292</span> est ouvert.</p>
+            <button class="closeLocker" pin="">Fermer le locker</button>
+        </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="assets/js/function.js"></script>
+    <script src="assets/js/variables.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/animation.js"></script>
 </body>
 </html>
