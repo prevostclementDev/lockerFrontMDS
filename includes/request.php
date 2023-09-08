@@ -4,7 +4,7 @@
 
     $handle = fopen( $filename , 'r' );
 
-    $contents = fread( $handle, 20000);
+    $contents = fread( $handle, 200000);
 
     fclose($handle);
 

@@ -184,23 +184,41 @@ function timelineSpeechModal() {
 
 // display all locker open
 function displayOpenLocker(){
-    fetch('http://localhost/site/MDSlocker/includes/request.php?params=status=1&url=http://10.54.128.96:8888/projetworkshop/getAllLocker.php')
+    fetch('http://localhost/site/MDSlocker/includes/request.php?params=isOpen=1&url=http://10.54.128.96:8888/projetworkshop/locker-list.php')
         .then(response => response.json())
         .then(response => {
-            console.log(response)
+
+            const templateLocker = document.querySelector('#lockerDisplayStatus');
+            const containerLocker = document.querySelector('.lockerStatusList');
+
+            if(Array.isArray(response)) {
+
+                containerLocker.innerHTML = '';
+
+                for(const locker of response) {
+                    let lockerElement = templateLocker.content.cloneNode(true).children[0];
+                    lockerElement.children[0].children[0].innerHTML = locker.code;
+                    lockerElement.children[1].setAttribute('pin',locker.pin);
+                    containerLocker.appendChild(lockerElement);
+                }
+
+            }
+
+            closeLockerEvent();
         })
-    closeLockerEvent();
+
 }
 
 // fetch to close locker
 function closeLockerEvent(){
     const closeButton = document.querySelectorAll('.closeLocker');
     closeButton.forEach(el => {
-        el.onclick = () => {
+        el.onclick = (e) => {
+            e.preventDefault();
             fetch('http://localhost/locker/includes/closeLocker.php?pin='+el.getAttribute('pin'))
                 .then(response => response.json())
                 .then(response => {
-                    console.log(response)
+                    set_setting_notice('error','Le casier est fermé');
                 })
         }
     })
